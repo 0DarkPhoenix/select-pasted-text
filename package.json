@@ -1,7 +1,7 @@
 {
   "name": "select-pasted-text",
   "displayName": "Select Pasted Text",
-  "description": "QoL tool which selects all your pasted text",
+  "description": "Lightweight QoL tool which selects the text you just pasted in",
   "version": "0.0.1",
   "engines": {
     "vscode": "^1.89.0"
@@ -9,13 +9,27 @@
   "categories": [
     "Other"
   ],
-  "activationEvents": [],
   "main": "./extension.js",
   "contributes": {
-    "commands": [{
-      "command": "select-pasted-text.helloWorld",
-      "title": "Hello World"
-    }]
+    "commands": [
+      {
+        "command": "extension.selectPastedText",
+        "title": "Select Pasted Text"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "extension.selectPastedText",
+        "key": "ctrl+v",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "extension.selectPastedText",
+        "key": "cmd+v",
+        "when": "editorTextFocus",
+        "mac": "true"
+      }
+    ]
   },
   "scripts": {
     "lint": "eslint .",
