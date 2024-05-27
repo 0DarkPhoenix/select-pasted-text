@@ -21,13 +21,12 @@
       {
         "command": "extension.selectPastedText",
         "key": "ctrl+v",
-        "when": "editorTextFocus"
+        "when": "editorTextFocus && !isMac"
       },
       {
         "command": "extension.selectPastedText",
         "key": "cmd+v",
-        "when": "editorTextFocus",
-        "mac": "true"
+        "when": "editorTextFocus && isMac"
       }
     ]
   },
