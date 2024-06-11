@@ -3,13 +3,17 @@
     "displayName": "Select Pasted Text",
     "description": "Lightweight QoL tool which selects the text you just pasted in",
     "publisher": "DarkPhoenix",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "engines": {
         "vscode": "^1.89.0"
     },
     "icon": "images/logo.png",
     "categories": [
         "Other"
+    ],
+    "main": "./extension.js",
+    "activationEvents": [
+        "onStartupFinished"
     ],
     "contributes": {
         "commands": [
@@ -37,12 +41,17 @@
         "test": "vscode-test"
     },
     "devDependencies": {
-        "@types/vscode": "^1.89.0",
         "@types/mocha": "^10.0.6",
         "@types/node": "18.x",
-        "eslint": "^8.57.0",
-        "typescript": "^5.4.5",
+        "@types/vscode": "^1.89.0",
         "@vscode/test-cli": "^0.0.9",
-        "@vscode/test-electron": "^2.3.9"
+        "@vscode/test-electron": "^2.3.9",
+        "vscode": "^1.89.0",
+        "eslint": "^8.57.0",
+        "typescript": "^5.4.5"
+    },
+    "dependencies": {
+        "debug": "^4.3.5",
+        "vscode": "^1.1.37"
     }
 }
