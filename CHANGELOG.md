@@ -1,10 +1,6 @@
 # Change Log
 
-All notable changes to the "select-pasted-text" extension will be documented in this file.
-
-Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
-
-## [1.0.0] - 2024-06-08
+## [1.0.1] - 2024-06-08
 
 ### Added
 
@@ -20,6 +16,6 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 -   Logo
 
-## [0.0.1] - YYYY-05-27
+## [0.0.1] - 2024-05-27
 
 ### Initial release
