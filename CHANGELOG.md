@@ -1,4 +1,6 @@
-# Change Log
+## [1.0.2] - 2024-06-14
+### Changed
+- Removed a keybind from package.json which would appear as a duplicate in the keyboard shortcut list
 
 ## [1.0.1] - 2024-06-08
 ### Added
