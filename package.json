@@ -40,17 +40,12 @@
         "test": "vscode-test"
     },
     "devDependencies": {
+        "@types/vscode": "^1.89.0",
         "@types/mocha": "^10.0.6",
         "@types/node": "18.x",
-        "@types/vscode": "^1.89.0",
-        "@vscode/test-cli": "^0.0.9",
-        "@vscode/test-electron": "^2.3.9",
-        "vscode": "^1.89.0",
         "eslint": "^8.57.0",
-        "typescript": "^5.4.5"
-    },
-    "dependencies": {
-        "debug": "^4.3.5",
-        "vscode": "^1.1.37"
+        "typescript": "^5.4.5",
+        "@vscode/test-cli": "^0.0.9",
+        "@vscode/test-electron": "^2.3.9"
     }
 }
