@@ -1,3 +1,6 @@
+## [1.0.3] - 2024-06-15
+### Fixed
+- Selecting text from bottom to top or using Ctrl+A/Cmd+A to select all preventing pasted text from being selected properly
 ## [1.0.2] - 2024-06-14
 ### Changed
 - Removed a keybind from package.json which would appear as a duplicate in the keyboard shortcut list

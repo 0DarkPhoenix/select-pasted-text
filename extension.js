@@ -18,18 +18,20 @@ function activate(context) {
                     document.uri.scheme === "vscode" ||
                     document.uri.scheme === "untitled"
                 ) {
-                    const currentPosition = editor.selection.active;
+                    // Save the current selection
+                    const currentSelection = editor.selection;
 
                     // Listen for the next paste event
                     await vscode.commands.executeCommand(
                         "editor.action.clipboardPasteAction"
                     );
 
+                    // Get the new cursor position after the paste
                     const newPosition = editor.selection.active;
 
-                    // Create a selection from the original cursor position to the new position
+                    // Create a selection from the start of the original selection to the new position
                     const newSelection = new vscode.Selection(
-                        currentPosition,
+                        currentSelection.start,
                         newPosition
                     );
                     editor.selection = newSelection;
