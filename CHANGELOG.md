@@ -1,3 +1,7 @@
+## [1.0.4] - 2024-06-18
+### Changed
+- Re-added removed keybind because I forgot it was specifically made for MacOS😅
+
 ## [1.0.3] - 2024-06-15
 ### Fixed
 - Selecting text from bottom to top or using Ctrl+A/Cmd+A to select all preventing pasted text from being selected properly
