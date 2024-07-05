@@ -35,6 +35,22 @@ function activate(context) {
 						newPosition,
 					);
 					editor.selection = newSelection;
+
+					// Listen for the space key press to unselect the text
+					const typeDisposable = vscode.commands.registerCommand(
+						"type",
+						({ text }) => {
+							if (text === " " && editor.selection.isEmpty === false) {
+								// Unselect the text before inserting the space
+								const position = editor.selection.end;
+								editor.selection = new vscode.Selection(position, position);
+							}
+							// Pass the event to the original type command
+							vscode.commands.executeCommand("default:type", { text });
+						},
+					);
+
+					context.subscriptions.push(typeDisposable);
 				}
 			}
 		},

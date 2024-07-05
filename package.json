@@ -1,56 +1,52 @@
 {
-    "name": "select-pasted-text",
-    "displayName": "Select Pasted Text",
-    "description": "Lightweight QoL tool which selects the text you just pasted in",
-    "publisher": "DarkPhoenix",
-    "version": "1.0.4",
-    "engines": {
-        "vscode": "^1.89.0"
-    },
-    "icon": "images/logo.png",
-    "categories": [
-        "Other"
-    ],
-    "main": "./extension.js",
-    "activationEvents": [
-        "onStartupFinished"
-    ],
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/0DarkPhoenix/select-pasted-text.git"
-    },
-    "contributes": {
-        "commands": [
-            {
-                "command": "extension.selectPastedText",
-                "title": "Select Pasted Text"
-            }
-        ],
-        "keybindings": [
-            {
-                "command": "extension.selectPastedText",
-                "key": "ctrl+v",
-                "when": "editorTextFocus && !isMac"
-            },
-            {
-                "command": "extension.selectPastedText",
-                "key": "cmd+v",
-                "when": "editorTextFocus && isMac"
-            }
-        ]
-    },
-    "scripts": {
-        "lint": "eslint .",
-        "pretest": "npm run lint",
-        "test": "vscode-test"
-    },
-    "devDependencies": {
-        "@types/vscode": "^1.89.0",
-        "@types/mocha": "^10.0.6",
-        "@types/node": "18.x",
-        "eslint": "^8.57.0",
-        "typescript": "^5.4.5",
-        "@vscode/test-cli": "^0.0.9",
-        "@vscode/test-electron": "^2.3.9"
-    }
+	"name": "select-pasted-text",
+	"displayName": "Select Pasted Text",
+	"description": "Lightweight QoL tool which selects the text you just pasted in",
+	"publisher": "DarkPhoenix",
+	"version": "1.0.5",
+	"engines": {
+		"vscode": "^1.89.0"
+	},
+	"icon": "images/logo.png",
+	"categories": ["Other"],
+	"main": "./extension.js",
+	"activationEvents": ["onStartupFinished"],
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/0DarkPhoenix/select-pasted-text.git"
+	},
+	"contributes": {
+		"commands": [
+			{
+				"command": "extension.selectPastedText",
+				"title": "Select Pasted Text"
+			}
+		],
+		"keybindings": [
+			{
+				"command": "extension.selectPastedText",
+				"key": "ctrl+v",
+				"when": "editorTextFocus && !isMac"
+			},
+			{
+				"command": "extension.selectPastedText",
+				"key": "cmd+v",
+				"when": "editorTextFocus && isMac"
+			}
+		]
+	},
+	"scripts": {
+		"lint": "eslint .",
+		"pretest": "npm run lint",
+		"test": "vscode-test"
+	},
+	"devDependencies": {
+		"@types/vscode": "^1.89.0",
+		"@types/mocha": "^10.0.6",
+		"@types/node": "18.x",
+		"eslint": "^8.57.0",
+		"typescript": "^5.4.5",
+		"@vscode/test-cli": "^0.0.9",
+		"@vscode/test-electron": "^2.3.9"
+	}
 }

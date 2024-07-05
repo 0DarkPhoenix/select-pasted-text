@@ -1,3 +1,7 @@
+## [1.0.5] - 2024-07-05
+### Added
+- Pressing space when text is selected doesn't remove the selected text
+
 ## [1.0.4] - 2024-06-18
 ### Changed
 - Re-added removed keybind because I forgot it was specifically made for MacOS😅
