@@ -1,3 +1,7 @@
+## [1.0.6] - 2024-07-06
+### Fixed
+- Pasting text would give an error "command 'type' already exists"
+
 ## [1.0.5] - 2024-07-05
 ### Added
 - Pressing space when text is selected doesn't remove the selected text
