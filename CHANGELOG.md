@@ -1,10 +1,14 @@
-## [1.0.6] - 2024-07-06
+## [1.0.8] - 2024-07-07
+### Added
+- Pressing enter when text is selected unselects the text before using the key
+
+## [1.0.7] - 2024-07-07
 ### Fixed
 - Pasting text would give an error "command 'type' already exists"
 
 ## [1.0.5] - 2024-07-05
 ### Added
-- Pressing space when text is selected doesn't remove the selected text
+- Pressing space when text is selected unselects the text before using the key
 
 ## [1.0.4] - 2024-06-18
 ### Changed

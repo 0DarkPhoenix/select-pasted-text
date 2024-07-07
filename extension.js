@@ -28,27 +28,28 @@ function activate(context) {
 				// Create a selection from the start of the original selection to the new position
 				const newSelection = new vscode.Selection(currentSelection.start, newPosition);
 				editor.selection = newSelection;
-
-				// Listen for the space key press to unselect the text
-				const typeDisposable = vscode.commands.registerTextEditorCommand(
-					"type",
-					(textEditor, edit, args) => {
-						if (args.text === " " && textEditor.selection.isEmpty === false) {
-							// Unselect the text before inserting the space
-							const position = textEditor.selection.end;
-							textEditor.selection = new vscode.Selection(position, position);
-						}
-						// Pass the event to the original type command
-						vscode.commands.executeCommand("default:type", args);
-					},
-				);
-
-				context.subscriptions.push(typeDisposable);
 			}
 		}
 	});
+	// Listen for the space or enter key press to unselect the text before using the pressed key
+	const typeDisposable = vscode.commands.registerTextEditorCommand(
+		"type",
+		(textEditor, edit, args) => {
+			if (
+				(args.text === " " || args.text === "\n") &&
+				textEditor.selection.isEmpty === false
+			) {
+				// Unselect the text before inserting the space or enter
+				const position = textEditor.selection.end;
+				textEditor.selection = new vscode.Selection(position, position);
+			}
+			// Pass the event to the original type command
+			vscode.commands.executeCommand("default:type", args);
+		},
+	);
 
 	context.subscriptions.push(disposable);
+	context.subscriptions.push(typeDisposable);
 }
 
 module.exports = {

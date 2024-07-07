@@ -3,7 +3,7 @@
 	"displayName": "Select Pasted Text",
 	"description": "Lightweight QoL tool which selects the text you just pasted in",
 	"publisher": "DarkPhoenix",
-	"version": "1.0.6",
+	"version": "1.0.8",
 	"engines": {
 		"vscode": "^1.89.0"
 	},
