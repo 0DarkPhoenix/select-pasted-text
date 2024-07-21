@@ -1,3 +1,7 @@
+## [1.0.9] - 2024-07-21
+### Changed
+- Updated the npm packages
+
 ## [1.0.8] - 2024-07-07
 ### Added
 - Pressing enter when text is selected unselects the text before using the key

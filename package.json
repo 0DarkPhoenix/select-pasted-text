@@ -3,18 +3,14 @@
 	"displayName": "Select Pasted Text",
 	"description": "Lightweight QoL tool which selects the text you just pasted in",
 	"publisher": "DarkPhoenix",
-	"version": "1.0.8",
+	"version": "1.0.9",
 	"engines": {
 		"vscode": "^1.89.0"
 	},
 	"icon": "images/logo.png",
-	"categories": [
-		"Other"
-	],
+	"categories": ["Other"],
 	"main": "./extension.js",
-	"activationEvents": [
-		"onStartupFinished"
-	],
+	"activationEvents": ["onStartupFinished"],
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/0DarkPhoenix/select-pasted-text.git"
