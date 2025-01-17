@@ -3,7 +3,7 @@
 	"displayName": "Select Pasted Text",
 	"description": "Lightweight QoL tool which selects the text you just pasted in",
 	"publisher": "DarkPhoenix",
-	"version": "1.0.9",
+	"version": "1.1.0",
 	"engines": {
 		"vscode": "^1.89.0"
 	},
@@ -18,18 +18,18 @@
 	"contributes": {
 		"commands": [
 			{
-				"command": "extension.selectPastedText",
+				"command": "selectPastedText.selectPastedText",
 				"title": "Select Pasted Text"
 			}
 		],
 		"keybindings": [
 			{
-				"command": "extension.selectPastedText",
+				"command": "selectPastedText.selectPastedText",
 				"key": "ctrl+v",
 				"when": "editorTextFocus && !isMac"
 			},
 			{
-				"command": "extension.selectPastedText",
+				"command": "selectPastedText.selectPastedText",
 				"key": "cmd+v",
 				"when": "editorTextFocus && isMac"
 			}

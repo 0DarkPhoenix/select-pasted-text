@@ -1,3 +1,7 @@
+## [1.1.0] - 2025-01-17
+### Added
+- Any character, whitespace (space) or newline (enter) inserted when the selection is active will be inserted at the end of the selection instead of replacing the selection with the character
+
 ## [1.0.9] - 2024-07-21
 ### Changed
 - Updated the npm packages
