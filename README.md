@@ -9,7 +9,7 @@ The "Select Pasted Text" extension automatically selects text that you paste int
 - Automatically selects pasted text in any file.
 - Works only when the cursor is within a file, ensuring it does not interfere with other parts of VS Code (like the terminal or debug console).
 - Binds to the default paste shortcut (`Ctrl+V` for Windows/Linux and `Cmd+V` for Mac).
-- When inserting a character, whitespace (space) or newline (enter), the new character won't delete the selected code. Instead, the new character will be inserted at the end of the selection.
+- When inserting a character, whitespace (space) or newline (enter), the new character won't delete the selected code. Instead, the new character will be inserted at the end of the selection. This only works for the selection of the pasted test.
 
 ## Usage
 

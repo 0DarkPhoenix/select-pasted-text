@@ -1,3 +1,10 @@
+## [1.2.0] - 2025-01-19
+### Added
+- Added new logic so the new character insertion logic only works for the selection of the pasted text
+
+### Changed
+- Opening brackets ("{", "(", "[") are no longer inserted at the end of a selection, so they will work as the standard VS Code behavior
+
 ## [1.1.0] - 2025-01-17
 ### Added
 - Any character, whitespace (space) or newline (enter) inserted when the selection is active will be inserted at the end of the selection instead of replacing the selection with the character
