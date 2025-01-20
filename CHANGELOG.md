@@ -1,3 +1,11 @@
+## [1.3.0] - 2025-01-20
+### Added
+- Added multi-cursor support
+
+### Improved
+-  Reduced the size of the logo from 6.7kb to 1.4kb
+-  Removed unused npm package
+
 ## [1.2.0] - 2025-01-19
 ### Added
 - Added new logic so the new character insertion logic only works for the selection of the pasted text

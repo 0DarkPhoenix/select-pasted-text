@@ -21,12 +21,14 @@ function activate(context) {
 					document.uri.scheme === "vscode" ||
 					document.uri.scheme === "untitled"
 				) {
-					const currentSelection = editor.selection;
+					const currentSelections = editor.selections;
 					ignoreNextSelectionChange = true;
 					await vscode.commands.executeCommand("editor.action.clipboardPasteAction");
-					const newPosition = editor.selection.active;
-					const newSelection = new vscode.Selection(currentSelection.start, newPosition);
-					editor.selection = newSelection;
+					const newPositions = editor.selections.map((sel) => sel.active);
+					const newSelections = currentSelections.map(
+						(sel, index) => new vscode.Selection(sel.start, newPositions[index]),
+					);
+					editor.selections = newSelections;
 					isSelectionFromPaste = true;
 				}
 			}
@@ -36,12 +38,18 @@ function activate(context) {
 	const typeDisposable = vscode.commands.registerTextEditorCommand(
 		"type",
 		(textEditor, edit, args) => {
-			// Check if the typed character is a opening bracket. If so, don't execute the logic
-			const openingBrackets = ["(", "[", "{"];
-			if (!openingBrackets.includes(args.text)) {
-				if (textEditor.selection.isEmpty === false && isSelectionFromPaste) {
-					const position = textEditor.selection.end;
-					textEditor.selection = new vscode.Selection(position, position);
+			// Special characters that should not trigger selection clearing
+			const specialCharacters = ["(", "[", "{"];
+			if (!specialCharacters.includes(args.text)) {
+				if (isSelectionFromPaste) {
+					const newSelections = textEditor.selections.map((selection) => {
+						if (!selection.isEmpty) {
+							const position = selection.end;
+							return new vscode.Selection(position, position);
+						}
+						return selection;
+					});
+					textEditor.selections = newSelections;
 				}
 			}
 			vscode.commands.executeCommand("default:type", args);
@@ -50,12 +58,9 @@ function activate(context) {
 
 	const selectionChangeDisposable = vscode.window.onDidChangeTextEditorSelection(() => {
 		if (ignoreNextSelectionChange) {
-			// Clear any existing timer
 			if (debounceTimer) {
 				clearTimeout(debounceTimer);
 			}
-
-			// Set new timer
 			debounceTimer = setTimeout(() => {
 				ignoreNextSelectionChange = false;
 			}, 50);
