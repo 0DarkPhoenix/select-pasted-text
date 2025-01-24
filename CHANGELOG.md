@@ -1,3 +1,7 @@
+## [1.3.1] - 2025-01-24
+### Changed
+- All different types of quotes are no longer inserted at the end of the selection, so they will work as the standard VS Code behavior
+
 ## [1.3.0] - 2025-01-20
 ### Added
 - Added multi-cursor support

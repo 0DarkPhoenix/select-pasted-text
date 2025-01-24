@@ -39,7 +39,7 @@ function activate(context) {
 		"type",
 		(textEditor, edit, args) => {
 			// Special characters that should not trigger selection clearing
-			const specialCharacters = ["(", "[", "{"];
+			const specialCharacters = ["(", "[", "{", '"', "'", "`"];
 			if (!specialCharacters.includes(args.text)) {
 				if (isSelectionFromPaste) {
 					const newSelections = textEditor.selections.map((selection) => {
