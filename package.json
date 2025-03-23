@@ -37,7 +37,7 @@
 		"configuration": {
 			"type": "object",
 			"properties": {
-				"select-pasted-text.typeCommandCompatibilityFix": {
+				"selectPastedText.typeCommandCompatibilityFix": {
 					"type": "boolean",
 					"default": false,
 					"description": "(Requires extension restart) This fix resolves a compatibility issue with extensions that overwrite the type command; however, it disables the behavior that appends the next keystroke at the end of the selection—instead, the keystroke overwrites the selection."

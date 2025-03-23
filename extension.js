@@ -52,7 +52,7 @@ function activate(context) {
 	context.subscriptions.push(selectionChangeDisposable);
 
 	//Fixes incompatibility related to both extensions attempting to overwrite the type command
-	const config = vscode.workspace.getConfiguration('select-pasted-text');
+	const config = vscode.workspace.getConfiguration('selectPastedText');
     const isTypeCompatibilityFixEnabled = config.get('typeCommandCompatibilityFix');
 	if(!isTypeCompatibilityFixEnabled)
 	{
