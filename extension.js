@@ -36,7 +36,7 @@ function activate(context) {
 	);
 
 	const typeDisposable = vscode.commands.registerTextEditorCommand(
-		"type",
+		"selectPastedText.type",
 		(textEditor, edit, args) => {
 			// Special characters that should not trigger selection clearing
 			const specialCharacters = ["(", "[", "{", '"', "'", "`"];

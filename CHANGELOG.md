@@ -1,3 +1,7 @@
+## [1.3.2] - 2025-03-23
+### Fixed
+- Fixed a compatibility issue that prevented this extension from working with other extensions that register text editor commands.  
+
 ## [1.3.1] - 2025-01-24
 ### Changed
 - All different types of quotes are no longer inserted at the end of the selection, so they will work as the standard VS Code behavior
