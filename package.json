@@ -33,7 +33,17 @@
 				"key": "cmd+v",
 				"when": "editorTextFocus && isMac"
 			}
-		]
+		],
+		"configuration": {
+			"type": "object",
+			"properties": {
+				"select-pasted-text.vscodevimfix": {
+					"type": "boolean",
+					"default": false,
+					"description": "(Requires extension restart) This fix resolves a compatibility issue with Vim for VSCode; however, it disables the behavior that appends the next keystroke at the end of the selection—instead, the keystroke overwrites the selection."
+				}
+			}
+		}
 	},
 	"scripts": {
 		"lint": "eslint .",

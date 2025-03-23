@@ -35,27 +35,6 @@ function activate(context) {
 		},
 	);
 
-	const typeDisposable = vscode.commands.registerTextEditorCommand(
-		"selectPastedText.type",
-		(textEditor, edit, args) => {
-			// Special characters that should not trigger selection clearing
-			const specialCharacters = ["(", "[", "{", '"', "'", "`"];
-			if (!specialCharacters.includes(args.text)) {
-				if (isSelectionFromPaste) {
-					const newSelections = textEditor.selections.map((selection) => {
-						if (!selection.isEmpty) {
-							const position = selection.end;
-							return new vscode.Selection(position, position);
-						}
-						return selection;
-					});
-					textEditor.selections = newSelections;
-				}
-			}
-			vscode.commands.executeCommand("default:type", args);
-		},
-	);
-
 	const selectionChangeDisposable = vscode.window.onDidChangeTextEditorSelection(() => {
 		if (ignoreNextSelectionChange) {
 			if (debounceTimer) {
@@ -70,8 +49,35 @@ function activate(context) {
 	});
 
 	context.subscriptions.push(disposable);
-	context.subscriptions.push(typeDisposable);
 	context.subscriptions.push(selectionChangeDisposable);
+
+	//Fixes incompatibility related to both extensions attempting to overwrite the type command
+	const config = vscode.workspace.getConfiguration('select-pasted-text');
+    const isVimFixEnabled = config.get('vscodevimfix');
+	if(!isVimFixEnabled)
+	{
+		const typeDisposable = vscode.commands.registerTextEditorCommand(
+			"type",
+			(textEditor, edit, args) => {
+				// Special characters that should not trigger selection clearing
+				const specialCharacters = ["(", "[", "{", '"', "'", "`"];
+				if (!specialCharacters.includes(args.text)) {
+					if (isSelectionFromPaste) {
+						const newSelections = textEditor.selections.map((selection) => {
+							if (!selection.isEmpty) {
+								const position = selection.end;
+								return new vscode.Selection(position, position);
+							}
+							return selection;
+						});
+						textEditor.selections = newSelections;
+					}
+				}
+				vscode.commands.executeCommand("default:type", args);
+			},
+		);	
+		context.subscriptions.push(typeDisposable);
+	}
 }
 
 module.exports = {
