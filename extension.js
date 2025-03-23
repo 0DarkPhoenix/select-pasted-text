@@ -19,7 +19,6 @@ function activate(context) {
 				const clipboardText = await vscode.env.clipboard.readText();
 				lastPastedText = clipboardText; // Store what's about to be pasted
 
-				// Rest of your existing paste logic...
 				const document = editor.document;
 				if (
 					document.uri.scheme === "file" ||
@@ -36,7 +35,7 @@ function activate(context) {
 					);
 					editor.selections = newSelections;
 					isSelectionFromPaste = true;
-					previousContentChangesText = lastPastedText; // Set it correctly after paste
+					previousContentChangesText = lastPastedText;
 				}
 			}
 		},
