@@ -3,6 +3,8 @@ const vscode = require("vscode");
 let isSelectionFromPaste = false;
 let ignoreNextSelectionChange = false;
 let debounceTimer = null;
+let previousContentChangesText = "";
+let lastPastedText = "";
 
 /**
  * @param {vscode.ExtensionContext} context
@@ -13,8 +15,12 @@ function activate(context) {
 		async () => {
 			const editor = vscode.window.activeTextEditor;
 			if (editor) {
-				const document = editor.document;
+				// Get clipboard content before pasting
+				const clipboardText = await vscode.env.clipboard.readText();
+				lastPastedText = clipboardText; // Store what's about to be pasted
 
+				// Rest of your existing paste logic...
+				const document = editor.document;
 				if (
 					document.uri.scheme === "file" ||
 					document.uri.scheme === "vscode-userdata" ||
@@ -30,31 +36,65 @@ function activate(context) {
 					);
 					editor.selections = newSelections;
 					isSelectionFromPaste = true;
+					previousContentChangesText = lastPastedText; // Set it correctly after paste
 				}
 			}
 		},
 	);
 
-	const typeDisposable = vscode.commands.registerTextEditorCommand(
-		"selectPastedText.type",
-		(textEditor, edit, args) => {
-			// Special characters that should not trigger selection clearing
-			const specialCharacters = ["(", "[", "{", '"', "'", "`"];
-			if (!specialCharacters.includes(args.text)) {
-				if (isSelectionFromPaste) {
-					const newSelections = textEditor.selections.map((selection) => {
-						if (!selection.isEmpty) {
-							const position = selection.end;
-							return new vscode.Selection(position, position);
-						}
-						return selection;
-					});
-					textEditor.selections = newSelections;
-				}
+	const editDisposable = vscode.workspace.onDidChangeTextDocument((event) => {
+		const editor = vscode.window.activeTextEditor;
+		if (!editor || event.document !== editor.document) return;
+
+		if (isSelectionFromPaste && event.contentChanges.length > 0) {
+			const change = event.contentChanges[0];
+
+			// Only handle character typing that replaces the selection
+			if (change.text.length === 1 && change.rangeLength > 0) {
+				// Undo the replacement that already happened
+				vscode.commands.executeCommand("undo").then(() => {
+					// Get the selection after undo
+					const selection = editor.selection;
+
+					// Get the text that is currently selected (The pasted text)
+					const selectedText = editor.document.getText(selection);
+
+					// Combine with typed character
+					const combinedText = selectedText + change.text;
+
+					// Replace selection with combined text
+					editor
+						.edit((editBuilder) => {
+							editBuilder.replace(selection, combinedText);
+						})
+						.then(() => {
+							// Get the document offset at the start of the selection
+							const startOffset = editor.document.offsetAt(selection.start);
+
+							// Calculate new position after insertion
+							const newOffset = startOffset + combinedText.length;
+
+							// Convert offset back to a position
+							const newPosition = editor.document.positionAt(newOffset);
+
+							// Set cursor at the new position
+							editor.selection = new vscode.Selection(newPosition, newPosition);
+						});
+
+					// Reset flags
+					isSelectionFromPaste = false;
+				});
+
+				return;
 			}
-			vscode.commands.executeCommand("default:type", args);
-		},
-	);
+		}
+		if (
+			event.contentChanges.length > 0 &&
+			(event.contentChanges[0].text.length > 1 || event.contentChanges[0].rangeLength === 0)
+		) {
+			previousContentChangesText = event.contentChanges[0].text;
+		}
+	});
 
 	const selectionChangeDisposable = vscode.window.onDidChangeTextEditorSelection(() => {
 		if (ignoreNextSelectionChange) {
@@ -70,7 +110,7 @@ function activate(context) {
 	});
 
 	context.subscriptions.push(disposable);
-	context.subscriptions.push(typeDisposable);
+	context.subscriptions.push(editDisposable);
 	context.subscriptions.push(selectionChangeDisposable);
 }
 

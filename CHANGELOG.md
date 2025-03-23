@@ -1,6 +1,6 @@
 ## [1.3.2] - 2025-03-23
 ### Fixed
-- Fixed a compatibility issue that prevented this extension from working with other extensions that register text editor commands.  
+- Rewritten the character insertion logic so it didn't cause compatibility issues with other extensions that overwrite the VS Code "type" command (Thanks to [DragosStefanNecula](https://github.com/DragosStefanNecula) for finding this issue)
 
 ## [1.3.1] - 2025-01-24
 ### Changed
