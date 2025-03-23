@@ -53,8 +53,8 @@ function activate(context) {
 
 	//Fixes incompatibility related to both extensions attempting to overwrite the type command
 	const config = vscode.workspace.getConfiguration('select-pasted-text');
-    const isVimFixEnabled = config.get('vscodevimfix');
-	if(!isVimFixEnabled)
+    const isTypeCompatibilityFixEnabled = config.get('typeCommandCompatibilityFix');
+	if(!isTypeCompatibilityFixEnabled)
 	{
 		const typeDisposable = vscode.commands.registerTextEditorCommand(
 			"type",
