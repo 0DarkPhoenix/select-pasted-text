@@ -53,8 +53,8 @@ function activate(context) {
 
 	//Fixes incompatibility related to both extensions attempting to overwrite the type command
 	const config = vscode.workspace.getConfiguration('selectPastedText');
-    const isTypeCompatibilityFixEnabled = config.get('typeCommandCompatibilityFix');
-	if(!isTypeCompatibilityFixEnabled)
+    const isTypeCommandCompatibilityFixEnabled = config.get('typeCommandCompatibilityFix');
+	if(!isTypeCommandCompatibilityFixEnabled)
 	{
 		const typeDisposable = vscode.commands.registerTextEditorCommand(
 			"type",
