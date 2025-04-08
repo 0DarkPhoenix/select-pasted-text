@@ -1,3 +1,7 @@
+## [1.3.3] - 2025-04-08
+### Added
+- Re-added multi cursor support for the new character insertion logic
+
 ## [1.3.2] - 2025-03-23
 ### Fixed
 - Rewritten the character insertion logic so it didn't cause compatibility issues with other extensions that overwrite the VS Code "type" command (Thanks to [DragosStefanNecula](https://github.com/DragosStefanNecula) for finding this issue)

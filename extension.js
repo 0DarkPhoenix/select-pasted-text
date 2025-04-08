@@ -52,32 +52,36 @@ function activate(context) {
 			if (change.text.length === 1 && change.rangeLength > 0) {
 				// Undo the replacement that already happened
 				vscode.commands.executeCommand("undo").then(() => {
-					// Get the selection after undo
-					const selection = editor.selection;
+					// Get all selections after undo
+					const selections = editor.selections;
 
-					// Get the text that is currently selected (The pasted text)
-					const selectedText = editor.document.getText(selection);
-
-					// Combine with typed character
-					const combinedText = selectedText + change.text;
-
-					// Replace selection with combined text
+					// Process each selection
 					editor
 						.edit((editBuilder) => {
-							editBuilder.replace(selection, combinedText);
+							for (const selection of selections) {
+								// Get the text that is currently selected (The pasted text)
+								const selectedText = editor.document.getText(selection);
+
+								// Combine with typed character
+								const combinedText = selectedText + change.text;
+
+								// Replace selection with combined text
+								editBuilder.replace(selection, combinedText);
+							}
 						})
 						.then(() => {
-							// Get the document offset at the start of the selection
-							const startOffset = editor.document.offsetAt(selection.start);
+							// Create new selections with cursors at the end of each insertion
+							const newSelections = selections.map((selection) => {
+								const selectedText = editor.document.getText(selection);
+								const startOffset = editor.document.offsetAt(selection.start);
+								const newOffset =
+									startOffset + selectedText.length + change.text.length;
+								const newPosition = editor.document.positionAt(newOffset);
+								return new vscode.Selection(newPosition, newPosition);
+							});
 
-							// Calculate new position after insertion
-							const newOffset = startOffset + combinedText.length;
-
-							// Convert offset back to a position
-							const newPosition = editor.document.positionAt(newOffset);
-
-							// Set cursor at the new position
-							editor.selection = new vscode.Selection(newPosition, newPosition);
+							// Set all cursors at their new positions
+							editor.selections = newSelections;
 						});
 
 					// Reset flags
